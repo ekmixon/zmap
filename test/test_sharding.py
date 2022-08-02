@@ -38,7 +38,7 @@ class TestSharding(unittest.TestCase):
 
     def _runTest(self, shards, max_threads):
         for threads in range(1, max_threads + 1):
-            for shard in range(0, shards):
+            for shard in range(shards):
                 with sh.sudo:
                     outfile = output_file_name(shards, shard, threads)
                     zmap(p=80, T=threads, shards=shards, shard=shard, _out="tempfile")

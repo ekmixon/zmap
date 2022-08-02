@@ -44,7 +44,7 @@ if os.environ.get("ZMAP_TRAVIS_BUILD", None):
 else:
 	prefix = os.path.join(directory, "cmake")
 	mkdir(prefix)
-	print("Installing to {}".format(prefix))
+	print(f"Installing to {prefix}")
 	cmake_installer(prefix=prefix, exclude_subdir=True)
 
 print("Done.")

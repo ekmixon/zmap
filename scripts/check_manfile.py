@@ -19,13 +19,13 @@ failures = False
 
 for ggo, ronn in checks:
     options = []
-    with open("src/" + ggo) as fd:
+    with open(f"src/{ggo}") as fd:
         for l in fd:
             if l.startswith("option "):
                 option = l.split()[1].lstrip('"').rstrip('"')
                 options.append(option)
 
-    man = open("src/" + ronn).read()
+    man = open(f"src/{ronn}").read()
 
     for option in options:
         if option not in man:

@@ -96,16 +96,15 @@ class ZBlocklistTest(unittest.TestCase):
 
     def execute(self, allowlist, blocklist, ipsfile="/tmp/ips", numtimestocat=1):
         cmd = "cat"
-        for _ in range(0, numtimestocat):
-            cmd += " %s" % ipsfile
-        cmd += " | %s" % self.path
+        for _ in range(numtimestocat):
+            cmd += f" {ipsfile}"
+        cmd += f" | {self.path}"
         if allowlist:
-            cmd = cmd + " -w %s" % allowlist
+            cmd = cmd + f" -w {allowlist}"
         if blocklist:
-            cmd = cmd + " -b %s" % blocklist
+            cmd = cmd + f" -b {blocklist}"
         results = subprocess.check_output(cmd, shell=True)
-        ips = results.rstrip().split("\n")
-        return ips
+        return results.rstrip().split("\n")
 
     def testValidBlocklist(self):
         res = self.execute(None, "/tmp/blocklist")
@@ -131,7 +130,7 @@ class ZBlocklistTest(unittest.TestCase):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("USAGE: %s zblocklist" % sys.argv[0])
+        print(f"USAGE: {sys.argv[0]} zblocklist")
         sys.exit(1)
     executable_path = sys.argv[1]
     assert(os.path.exists(executable_path))
